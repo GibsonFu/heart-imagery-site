@@ -35,7 +35,7 @@
     .links{display:flex;gap:28px;font-size:.9rem;letter-spacing:.1em}
     .links a{opacity:.78}.links a:hover{opacity:1}
     .hero{min-height:100svh;display:grid;place-items:center;position:relative;overflow:hidden;background:#ece8df}
-    .hero::before{content:"";position:absolute;inset:0;background:url('./assets/hero.png') center/cover no-repeat;filter:saturate(.95) contrast(.98)}
+    .hero::before{content:"";position:absolute;inset:0;background:url('./assets/optimized/hero.jpg') center/cover no-repeat;filter:saturate(.95) contrast(.98)}
     .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(243,239,230,.06),rgba(243,239,230,.0) 60%,rgba(243,239,230,.08));pointer-events:none}
     .hero-cta{position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);z-index:2;display:flex;gap:14px;align-items:center}
     .button{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(40,52,47,.45);background:rgba(248,246,239,.8);padding:12px 24px;letter-spacing:.16em;font-size:.92rem;backdrop-filter:blur(7px);transition:.2s}
@@ -57,7 +57,7 @@
     .quote{margin-top:32px;padding:24px 0 24px 24px;border-left:2px solid var(--orange);font-size:1.15rem;letter-spacing:.08em;color:#394942}
     .concept{background:rgba(255,255,255,.36);position:relative}
     .concept::before{content:"";position:absolute;inset:0;background:linear-gradient(118deg,transparent 10%,rgba(47,125,131,.06) 50%,transparent 72%);pointer-events:none}
-    .concept::after{content:"";position:absolute;right:3vw;bottom:2vw;width:34vw;height:22vw;background:url('./assets/concept-watercolor.png') center/contain no-repeat;opacity:.16;pointer-events:none}
+    .concept::after{content:"";position:absolute;right:3vw;bottom:2vw;width:34vw;height:22vw;background:url('./assets/optimized/vignette.jpg') center/contain no-repeat;opacity:.16;pointer-events:none}
     .concept h2{font-size:clamp(2.8rem,5vw,5.4rem)}
     .concept .lead{font-size:clamp(1.3rem,1.8vw,1.6rem)}
     .concept p{font-size:1.1rem}
@@ -105,7 +105,7 @@
     .season-controls button{border:1px solid #9daaa1;background:transparent;padding:10px 16px;cursor:pointer}
     .season-controls button:hover{background:var(--green);color:#fff}
     .ending{text-align:center;padding:130px 6vw 150px;position:relative}
-    .ending::before{content:"";position:absolute;left:4vw;bottom:4vw;width:24vw;height:24vw;background:url('./assets/iceland-vignette.png') center/contain no-repeat;opacity:.14;pointer-events:none}
+    .ending::before{content:"";position:absolute;left:4vw;bottom:4vw;width:24vw;height:24vw;background:url('./assets/optimized/vignette.jpg') center/contain no-repeat;opacity:.14;pointer-events:none}
     .ending .line{width:100px;height:1px;background:#8e978f;margin:26px auto}
     .ending p{max-width:900px;margin:88px auto 0;color:#59635f;font-size:1.12rem;text-align:center;line-height:2.15}
     footer{padding:26px 5vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;font-size:.82rem;color:#727875}
@@ -153,7 +153,7 @@
         <p>這些作品不追求精準複製眼前的景物，而更像是一段段被記住的感受：線條有時急促、有時安靜，色彩偶爾只在灰階中留下幾筆，像情緒在理性世界裡留下的痕跡。</p>
         <div class="quote">「以醫者之心理解生命，以畫者之筆傳遞對世界的善良與溫柔。」</div>
       </div>
-      <div class="about-art"><img src="./assets/about.png?v=3" alt="蘇東平作者簡介視覺"></div>
+      <div class="about-art"><img src="./assets/optimized/about.jpg?v=4" alt="蘇東平作者簡介視覺"></div>
     </section>
 
     <section id="concept" class="concept">
@@ -179,8 +179,8 @@
         <p>先選擇一段季節旅程，再沿著畫框裡的光與手寫題記，一幅一幅慢慢觀看。</p>
       </div>
       <div class="season-intro">
-        <button class="season-card active" data-season="spring"><img src="2026春 希臘/page-0.jpg" alt="春・希臘封面"><div><small>SPRING · 2026</small><strong>春・希臘</strong></div></button>
-        <button class="season-card" data-season="summer"><img src="2025夏 冰島/投影片1.JPG" alt="夏・冰島封面"><div><small>SUMMER · 2025</small><strong>夏・冰島</strong></div></button>
+        <button class="season-card active" data-season="spring"><img src="./assets/optimized/spring-cover.jpg" alt="春・希臘封面"><div><small>SPRING · 2026</small><strong>春・希臘</strong></div></button>
+        <button class="season-card" data-season="summer"><img src="./assets/optimized/summer-cover.jpg" alt="夏・冰島封面"><div><small>SUMMER · 2025</small><strong>夏・冰島</strong></div></button>
       </div>
       <div class="season-view active" id="springView">
         <div class="season-stage"><div class="season-frame" id="springFrame"><img id="springImage" alt="春・希臘作品"></div></div>
@@ -207,8 +207,8 @@
   </div>
 
   <script>
-    const springFiles=Array.from({length:24},(_,i)=>`2026春 希臘/page-${String(i+1).padStart(2,'0')}.jpg`);
-    const summerFiles=Array.from({length:23},(_,i)=>`2025夏 冰島/投影片${i+2}.JPG`);
+    const springFiles=Array.from({length:24},(_,i)=>`./assets/optimized/spring-${String(i+1).padStart(2,'0')}.jpg`);
+    const summerFiles=Array.from({length:23},(_,i)=>`./assets/optimized/summer-${String(i+2).padStart(2,'0')}.jpg`);
     const springTitles=['港口的藍','羅馬山城的午後','泉水落在石上','城市的斜光','海岸線與遠方','船離開以後','愛琴海來信','靠岸時的綠','島與島之間','晚餐前的海','阿馬爾菲的坡','波西塔諾，向下走','羅馬的餘暉','回望海面','小小的甲板','藍色的練習','午後無人說話','鹽留在紙上','最後一盞船燈','旅程的背面','陸地正在靠近','一段慢慢變暗的海','寫給春天的明信片','抵達之前'];
     const summerTitles=['雷克雅維克的夜','藍湖，沉默發亮','教會山的風','黑沙灘上的白浪','維克午後','冰川的呼吸','火山留下的線','遠方的瀑布','苔原的綠','霧裡的山口','北方的屋頂','胡薩維克清晨','海鳥把天劃開','阿克雷里以東','一小塊融化的藍','蘭德曼納勞卡','紅色山谷','石頭記得水','走過無人之地','夜不完全降臨','冬天的預告','島的另一面','把光帶回家'];
     const prose=['海面把城市揉成一小塊藍，船在其中緩慢移動。畫裡的線不是邊界，是出發時還沒說完的話。','手寫的地名像一枚小小路標，提醒我：風景從不只在眼前，也在我們願意停留的時間裡。','光從島的背面折回來，白牆、山坡和水都變得輕。那一天，遠方沒有距離，只有呼吸。','旅人把日期留在角落，像把一顆種子埋進畫紙。多年後再看，仍能聽見當時海風的方向。'];
