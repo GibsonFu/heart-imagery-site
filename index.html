@@ -35,7 +35,7 @@
     .links{display:flex;gap:28px;font-size:.9rem;letter-spacing:.1em}
     .links a{opacity:.78}.links a:hover{opacity:1}
     .hero{min-height:100svh;display:grid;place-items:center;position:relative;overflow:hidden;background:#ece8df}
-    .hero::before{content:"";position:absolute;inset:0;background:url('assets/hero.png') center/cover no-repeat;filter:saturate(.95) contrast(.98)}
+    .hero::before{content:"";position:absolute;inset:0;background:url('./assets/hero.png') center/cover no-repeat;filter:saturate(.95) contrast(.98)}
     .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(243,239,230,.06),rgba(243,239,230,.0) 60%,rgba(243,239,230,.08));pointer-events:none}
     .hero-cta{position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);z-index:2;display:flex;gap:14px;align-items:center}
     .button{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(40,52,47,.45);background:rgba(248,246,239,.8);padding:12px 24px;letter-spacing:.16em;font-size:.92rem;backdrop-filter:blur(7px);transition:.2s}
@@ -57,7 +57,7 @@
     .quote{margin-top:32px;padding:24px 0 24px 24px;border-left:2px solid var(--orange);font-size:1.15rem;letter-spacing:.08em;color:#394942}
     .concept{background:rgba(255,255,255,.36);position:relative}
     .concept::before{content:"";position:absolute;inset:0;background:linear-gradient(118deg,transparent 10%,rgba(47,125,131,.06) 50%,transparent 72%);pointer-events:none}
-    .concept::after{content:"";position:absolute;right:3vw;bottom:2vw;width:34vw;height:22vw;background:url('assets/concept-watercolor.png') center/contain no-repeat;opacity:.16;pointer-events:none}
+    .concept::after{content:"";position:absolute;right:3vw;bottom:2vw;width:34vw;height:22vw;background:url('./assets/concept-watercolor.png') center/contain no-repeat;opacity:.16;pointer-events:none}
     .concept h2{font-size:clamp(2.8rem,5vw,5.4rem)}
     .concept .lead{font-size:clamp(1.3rem,1.8vw,1.6rem)}
     .concept p{font-size:1.1rem}
@@ -105,7 +105,7 @@
     .season-controls button{border:1px solid #9daaa1;background:transparent;padding:10px 16px;cursor:pointer}
     .season-controls button:hover{background:var(--green);color:#fff}
     .ending{text-align:center;padding:130px 6vw 150px;position:relative}
-    .ending::before{content:"";position:absolute;left:4vw;bottom:4vw;width:24vw;height:24vw;background:url('assets/iceland-vignette.png') center/contain no-repeat;opacity:.14;pointer-events:none}
+    .ending::before{content:"";position:absolute;left:4vw;bottom:4vw;width:24vw;height:24vw;background:url('./assets/iceland-vignette.png') center/contain no-repeat;opacity:.14;pointer-events:none}
     .ending .line{width:100px;height:1px;background:#8e978f;margin:26px auto}
     .ending p{max-width:900px;margin:88px auto 0;color:#59635f;font-size:1.12rem;text-align:center;line-height:2.15}
     footer{padding:26px 5vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;font-size:.82rem;color:#727875}
@@ -153,7 +153,7 @@
         <p>這些作品不追求精準複製眼前的景物，而更像是一段段被記住的感受：線條有時急促、有時安靜，色彩偶爾只在灰階中留下幾筆，像情緒在理性世界裡留下的痕跡。</p>
         <div class="quote">「以醫者之心理解生命，以畫者之筆傳遞對世界的善良與溫柔。」</div>
       </div>
-      <div class="about-art"><img src="assets/about.png" alt="蘇東平作者簡介視覺" loading="lazy"></div>
+      <div class="about-art"><img src="./assets/about.png" alt="蘇東平作者簡介視覺" loading="lazy"></div>
     </section>
 
     <section id="concept" class="concept">
@@ -214,13 +214,14 @@
     const prose=['海面把城市揉成一小塊藍，船在其中緩慢移動。畫裡的線不是邊界，是出發時還沒說完的話。','手寫的地名像一枚小小路標，提醒我：風景從不只在眼前，也在我們願意停留的時間裡。','光從島的背面折回來，白牆、山坡和水都變得輕。那一天，遠方沒有距離，只有呼吸。','旅人把日期留在角落，像把一顆種子埋進畫紙。多年後再看，仍能聽見當時海風的方向。'];
     function drawSeason(kind,index,turn){
       const summer=kind==='summer', files=summer?summerFiles:springFiles, titles=summer?summerTitles:springTitles, key=summer?'summer':'spring', n=index+1;
-      document.getElementById(key+'Image').src=files[index]; document.getElementById(key+'Image').alt=titles[index];
+      document.getElementById(key+'Image').src=encodeURI(files[index]); document.getElementById(key+'Image').alt=titles[index];
       document.getElementById(key+'Number').textContent=`${String(n).padStart(2,'0')} / ${String(files.length).padStart(2,'0')}`;
       document.getElementById(key+'Title').textContent=titles[index]; document.getElementById(key+'Text').textContent=prose[index%prose.length];
       document.getElementById(key+'Note').textContent=summer?'Iceland · Summer 2025 · hand-written travel note':'Greece · Spring 2026 · hand-written travel note';
       const frame=document.getElementById(key+'Frame'); frame.classList.remove('turn-left','turn-right'); void frame.offsetWidth; frame.classList.add(turn==='left'?'turn-left':'turn-right');
     }
     let springIndex=0,summerIndex=0;
+    document.querySelectorAll('img[src]').forEach(img=>{if(/[春夏希臘冰島投影片]/.test(img.getAttribute('src')))img.src=encodeURI(img.getAttribute('src'))});
     drawSeason('spring',springIndex,'right'); drawSeason('summer',summerIndex,'right');
     document.querySelectorAll('[data-season]').forEach(card=>card.onclick=()=>{const kind=card.dataset.season;document.querySelectorAll('[data-season]').forEach(x=>x.classList.toggle('active',x===card));document.querySelectorAll('.season-view').forEach(x=>x.classList.toggle('active',x.id===kind+'View'))});
     document.getElementById('springPrev').onclick=()=>{springIndex=(springIndex+springFiles.length-1)%springFiles.length;drawSeason('spring',springIndex,'left')};
@@ -228,7 +229,7 @@
     document.getElementById('summerPrev').onclick=()=>{summerIndex=(summerIndex+summerFiles.length-1)%summerFiles.length;drawSeason('summer',summerIndex,'left')};
     document.getElementById('summerNext').onclick=()=>{summerIndex=(summerIndex+1)%summerFiles.length;drawSeason('summer',summerIndex,'right')};
     const lb=document.getElementById('lightbox'), lbImg=document.getElementById('lightboxImg');
-    document.querySelectorAll('.season-frame img').forEach(img=>img.addEventListener('click',()=>{lbImg.src=img.src;lbImg.alt=img.alt;lb.classList.add('open');document.body.style.overflow='hidden';}));
+    document.querySelectorAll('.season-frame img').forEach(img=>img.addEventListener('click',()=>{lbImg.src=img.currentSrc||img.src;lbImg.alt=img.alt;lb.classList.add('open');document.body.style.overflow='hidden';}));
     lb.addEventListener('click',()=>{lb.classList.remove('open'); document.body.style.overflow='';});
     document.addEventListener('keydown',e=>{if(e.key==='Escape'){lb.classList.remove('open');document.body.style.overflow='';}});
     const nav=document.getElementById('nav'); window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>24));
