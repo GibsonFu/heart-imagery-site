@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f3efe6" />
+  <title>心象之間｜蘇東平繪畫展</title>
+  <meta name="description" content="《心象之間》蘇東平繪畫展——以醫者之心凝視生命，以畫者之筆描繪世界的善良與溫柔。" />
+  <style>
+    :root{
+      --paper:#f3efe6;
+      --ink:#28342f;
+      --muted:#6d746f;
+      --green:#2f6a58;
+      --teal:#2f7d83;
+      --orange:#d96f36;
+      --line:rgba(40,52,47,.18);
+      --shadow:0 16px 45px rgba(44,50,45,.12);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);background:
+      radial-gradient(circle at 18% 18%,rgba(255,255,255,.86),transparent 30%),
+      linear-gradient(rgba(61,55,44,.025) 1px,transparent 1px),
+      var(--paper);
+      background-size:auto, 100% 5px, auto;
+      font-family:"PingFang TC","Noto Serif TC","Songti TC","Microsoft JhengHei",serif;
+      line-height:1.8;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    .nav{position:fixed;z-index:30;left:0;right:0;top:0;padding:15px 4vw;display:flex;align-items:center;justify-content:space-between;transition:.25s;background:linear-gradient(to bottom,rgba(243,239,230,.9),rgba(243,239,230,.2));backdrop-filter:blur(8px)}
+    .nav.scrolled{background:rgba(243,239,230,.94);box-shadow:0 1px 0 var(--line)}
+    .brand{letter-spacing:.22em;font-weight:700;font-size:.96rem}
+    .links{display:flex;gap:28px;font-size:.9rem;letter-spacing:.1em}
+    .links a{opacity:.78}.links a:hover{opacity:1}
+    .hero{min-height:100svh;display:grid;place-items:center;position:relative;overflow:hidden;background:#ece8df}
+    .hero::before{content:"";position:absolute;inset:0;background:url('assets/hero.png') center/cover no-repeat;filter:saturate(.95) contrast(.98)}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(243,239,230,.06),rgba(243,239,230,.0) 60%,rgba(243,239,230,.08));pointer-events:none}
+    .hero-cta{position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);z-index:2;display:flex;gap:14px;align-items:center}
+    .button{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(40,52,47,.45);background:rgba(248,246,239,.8);padding:12px 24px;letter-spacing:.16em;font-size:.92rem;backdrop-filter:blur(7px);transition:.2s}
+    .button:hover{transform:translateY(-2px);background:#fff}
+    main{overflow:hidden}
+    section{padding:110px 6vw}
+    .eyebrow{font:600 .78rem/1.2 Arial,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+    h2{font-weight:500;font-size:clamp(2rem,4.2vw,4.6rem);letter-spacing:.12em;line-height:1.18;margin:.08em 0 .45em}
+    .lead{font-size:clamp(1.08rem,1.55vw,1.35rem);max-width:830px;color:#47524d;line-height:2.05}
+    .about{display:grid;grid-template-columns:1.05fr .95fr;gap:7vw;align-items:center}
+    .section,.gallery-wrap,.ending{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+    .section.is-visible,.gallery-wrap.is-visible,.ending.is-visible{opacity:1;transform:none}
+    .about-copy,.concept-grid,.gallery-head,.season-intro,.season-view{transition:transform .7s ease}
+    .about-art img{transition:transform .8s ease,box-shadow .8s ease}
+    .about-art img:hover{transform:translateY(-8px) rotate(.5deg);box-shadow:0 24px 50px rgba(44,50,45,.18)}
+    .about-art{position:relative}
+    .about-art img{box-shadow:var(--shadow);border:1px solid rgba(80,70,55,.12)}
+    .about-art::before{content:"";position:absolute;width:42%;height:30%;background:#dfe8d7;right:-6%;top:-7%;z-index:-1;transform:rotate(3deg)}
+    .quote{margin-top:32px;padding:24px 0 24px 24px;border-left:2px solid var(--orange);font-size:1.15rem;letter-spacing:.08em;color:#394942}
+    .concept{background:rgba(255,255,255,.36);position:relative}
+    .concept::before{content:"";position:absolute;inset:0;background:linear-gradient(118deg,transparent 10%,rgba(47,125,131,.06) 50%,transparent 72%);pointer-events:none}
+    .concept::after{content:"";position:absolute;right:3vw;bottom:2vw;width:34vw;height:22vw;background:url('assets/concept-watercolor.png') center/contain no-repeat;opacity:.16;pointer-events:none}
+    .concept h2{font-size:clamp(2.8rem,5vw,5.4rem)}
+    .concept .lead{font-size:clamp(1.3rem,1.8vw,1.6rem)}
+    .concept p{font-size:1.1rem}
+    .concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:start}
+    .concept-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .card{padding:28px 24px;border:1px solid var(--line);background:rgba(247,244,236,.75);min-height:190px}
+    .card .n{font:700 2rem/1 Arial,sans-serif;color:rgba(47,106,88,.28);margin-bottom:18px}
+    .card strong{display:block;font-size:1.35rem;letter-spacing:.14em;margin-bottom:14px}
+    .card span{font-size:1.05rem;line-height:1.85}
+    .gallery-wrap{padding-top:70px}
+    .gallery-head{display:flex;justify-content:space-between;gap:40px;align-items:start;margin-bottom:36px}
+    .gallery-head p{max-width:620px;color:var(--muted);text-align:center;margin:55px auto 0;line-height:1.9}
+    .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 20px}
+    .work{margin:0;position:relative;cursor:zoom-in;background:#fff;padding:16px 16px 10px;border:1px solid rgba(40,52,47,.13);box-shadow:0 8px 22px rgba(39,44,40,.08);transition:transform .25s,box-shadow .25s}
+    .work:hover{transform:translateY(-4px) rotate(-.15deg);box-shadow:0 14px 30px rgba(39,44,40,.14)}
+    .work img{width:100%;aspect-ratio:1.38;object-fit:contain;background:#fbfaf6}
+    .work figcaption{padding:13px 2px 3px;font-size:.8rem;letter-spacing:.12em;color:#6b6f6c}
+    .gallery-pager{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:34px;font:14px Arial,sans-serif;color:#6b746f}
+    .gallery-pager button{border:1px solid var(--line);background:transparent;color:var(--ink);padding:10px 16px;cursor:pointer}
+    .gallery-pager button:hover:not(:disabled){background:var(--green);color:#fff}
+    .gallery-pager button:disabled{opacity:.35;cursor:default}
+    .season-intro{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin:0 0 34px}
+    .season-card{position:relative;min-height:230px;border:1px solid var(--line);background:#fff;padding:18px;text-align:left;cursor:pointer;overflow:hidden;transition:.35s;box-shadow:0 8px 22px rgba(39,44,40,.07)}
+    .season-card:hover,.season-card.active{transform:translateY(-5px);box-shadow:0 16px 32px rgba(39,44,40,.14);border-color:var(--green)}
+    .season-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center;background:#e8e4da;opacity:.55;transform:scale(1.28);transform-origin:right center;transition:.35s}
+    .season-card:hover img,.season-card.active img{opacity:.66;transform:scale(1.34)}
+    .season-card div{position:relative;z-index:1;background:rgba(247,244,236,.88);display:inline-block;padding:10px 16px}
+    .season-card small{display:block;color:var(--green);font:600 12px Arial,sans-serif;letter-spacing:.2em}
+    .season-card strong{display:block;font-size:29px;font-weight:400;letter-spacing:.15em;margin-top:7px}
+    .season-card span{display:block;color:#68716b;font-size:13px;margin-top:4px}
+    .season-view{display:none;perspective:1200px;min-height:620px;align-items:center;justify-content:center;gap:52px}
+    .season-view.active{display:flex}
+    .season-stage{width:min(790px,66vw);transform-style:preserve-3d}
+    .season-frame{background:linear-gradient(135deg,#f8f2df 0%,#bb9656 8%,#eed799 18%,#966d38 28%,#d8b46b 62%,#8c6331 100%);padding:24px;border:12px solid #a77b3e;box-shadow:inset 0 0 0 5px #e4c783,inset 0 0 0 9px #704b27,0 22px 45px rgba(37,35,26,.34);transform:rotateY(0deg) rotateX(1deg);transition:transform .55s ease;cursor:zoom-in}
+    .season-frame.turn-left{transform:rotateY(-10deg) rotateX(1deg)}
+    .season-frame.turn-right{transform:rotateY(10deg) rotateX(1deg)}
+    .season-frame img{width:100%;height:570px;object-fit:contain;background:#fbfaf6}
+    .season-frame:hover{box-shadow:inset 0 0 0 5px #e4c783,inset 0 0 0 9px #704b27,0 28px 58px rgba(37,35,26,.38)}
+    .season-caption{max-width:310px}
+    .season-caption .season-number{font:600 13px Arial,sans-serif;color:var(--green);letter-spacing:.18em}
+    .season-caption h3{font-weight:400;font-size:31px;letter-spacing:.1em;margin:13px 0}
+    .season-caption p{color:#59635d;line-height:2}
+    .season-caption small{color:#7a857e;line-height:1.8}
+    .season-controls{display:flex;gap:10px;margin-top:23px}
+    .season-controls button{border:1px solid #9daaa1;background:transparent;padding:10px 16px;cursor:pointer}
+    .season-controls button:hover{background:var(--green);color:#fff}
+    .ending{text-align:center;padding:130px 6vw 150px;position:relative}
+    .ending::before{content:"";position:absolute;left:4vw;bottom:4vw;width:24vw;height:24vw;background:url('assets/iceland-vignette.png') center/contain no-repeat;opacity:.14;pointer-events:none}
+    .ending .line{width:100px;height:1px;background:#8e978f;margin:26px auto}
+    .ending p{max-width:900px;margin:88px auto 0;color:#59635f;font-size:1.12rem;text-align:center;line-height:2.15}
+    footer{padding:26px 5vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;font-size:.82rem;color:#727875}
+    .lightbox{position:fixed;inset:0;z-index:60;background:rgba(20,25,23,.92);display:none;place-items:center;padding:28px;cursor:zoom-out}
+    .lightbox.open{display:grid}
+    .lightbox img{max-height:90vh;max-width:92vw;box-shadow:0 20px 70px rgba(0,0,0,.45);background:#fff}
+    .close{position:fixed;right:28px;top:22px;color:#fff;font:300 34px/1 Arial,sans-serif;opacity:.9}
+    .menu{display:none;border:0;background:transparent;font-size:1.35rem;color:var(--ink)}
+    @media(max-width:900px){
+      .links{display:none;position:absolute;right:4vw;top:58px;background:rgba(243,239,230,.98);padding:18px 22px;box-shadow:var(--shadow);flex-direction:column;gap:14px}
+      .links.show{display:flex}.menu{display:block}
+      .hero{min-height:72svh}.hero::before{background-position:center}
+      .hero-cta{bottom:4vh}.about,.concept-grid{grid-template-columns:1fr;gap:48px}
+      section{padding:82px 6vw}.gallery-head{display:block}.gallery-head p{margin:22px auto 0}.concept-cards{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px}.season-view{display:none;flex-direction:column;gap:28px}.season-view.active{display:flex}.season-stage{width:100%}.season-frame img{height:52vh}.season-caption{max-width:none}
+    }
+    @media(max-width:620px){
+      .hero{min-height:58svh;margin-top:48px}.hero::before{background-size:cover;background-position:center center}
+      .hero-cta{display:none}.concept-cards{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 8px}.work{padding:6px 6px 5px}.work figcaption{font-size:.7rem;padding-top:8px}.about-art::before{display:none}footer{display:block;text-align:center}.links{font-size:.86rem}.season-intro{grid-template-columns:1fr;gap:12px}.season-card{min-height:170px}.season-frame{padding:10px;border-width:5px}.season-frame img{height:42vh}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.work,.nav,.button,.section,.gallery-wrap,.ending{transition:none}.section,.gallery-wrap,.ending{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav" id="nav">
+      <a class="brand" href="#top">心象之間</a>
+      <button class="menu" id="menu" aria-label="開啟選單">☰</button>
+      <div class="links" id="links">
+        <a href="#about">關於作者</a>
+        <a href="#concept">創作理念</a>
+        <a href="#works">作品一覽</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="心象之間 蘇東平繪畫展首頁主視覺">
+    </section>
+
+    <section id="about" class="about">
+      <div class="about-copy">
+        <div class="eyebrow">About the Artist</div>
+        <h2>醫者看見腦，<br>畫者看見心。</h2>
+        <p class="lead">蘇東平長年深耕精神醫學與腦影像領域。臨床與研究，使他習慣在表象之外，理解情緒、感知與人的內在世界；而當他拿起畫筆，這份凝視離開診間與影像，走入城市、山海、旅途與日常。</p>
+        <p>這些作品不追求精準複製眼前的景物，而更像是一段段被記住的感受：線條有時急促、有時安靜，色彩偶爾只在灰階中留下幾筆，像情緒在理性世界裡留下的痕跡。</p>
+        <div class="quote">「以醫者之心理解生命，以畫者之筆傳遞對世界的善良與溫柔。」</div>
+      </div>
+      <div class="about-art"><img src="assets/about.png" alt="蘇東平作者簡介視覺" loading="lazy"></div>
+    </section>
+
+    <section id="concept" class="concept">
+      <div class="concept-grid">
+        <div>
+          <div class="eyebrow">Curatorial Statement</div>
+          <h2>心象之間</h2>
+          <p class="lead">「心象」不是單純的風景，而是景物經過記憶、情緒與觀看之後，在心裡留下的形狀。</p>
+          <p>這場展覽將「精神醫學的凝視」與「旅途中的速寫」放在同一個空間裡。它們看似分屬科學與藝術，卻都在做相似的事——試著理解眼前看得見的表象，以及那些尚未被說出的內在。</p>
+        </div>
+        <div class="concept-cards">
+          <div class="card"><div class="n">01</div><strong>凝視</strong><span>從觀察開始，讓景物在紙上慢慢顯影。</span></div>
+          <div class="card"><div class="n">02</div><strong>感知</strong><span>不只描繪形體，也保留當下的情緒與溫度。</span></div>
+          <div class="card"><div class="n">03</div><strong>記憶</strong><span>旅行片段成為個人記憶，也成為時間的證詞。</span></div>
+          <div class="card"><div class="n">04</div><strong>溫柔</strong><span>用不喧嘩的線條，看待人與世界的複雜。</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="works" class="gallery-wrap">
+      <div class="gallery-head">
+        <div><div class="eyebrow">Selected Works</div><h2>作品集</h2></div>
+        <p>先選擇一段季節旅程，再沿著畫框裡的光與手寫題記，一幅一幅慢慢觀看。</p>
+      </div>
+      <div class="season-intro">
+        <button class="season-card active" data-season="spring"><img src="2026春 希臘/page-0.jpg" alt="春・希臘封面"><div><small>SPRING · 2026</small><strong>春・希臘</strong></div></button>
+        <button class="season-card" data-season="summer"><img src="2025夏 冰島/投影片1.JPG" alt="夏・冰島封面"><div><small>SUMMER · 2025</small><strong>夏・冰島</strong></div></button>
+      </div>
+      <div class="season-view active" id="springView">
+        <div class="season-stage"><div class="season-frame" id="springFrame"><img id="springImage" alt="春・希臘作品"></div></div>
+        <div class="season-caption"><div class="season-number" id="springNumber"></div><h3 id="springTitle"></h3><p id="springText"></p><small id="springNote"></small><div class="season-controls"><button id="springPrev">上一幅</button><button id="springNext">下一幅</button></div></div>
+      </div>
+      <div class="season-view" id="summerView">
+        <div class="season-stage"><div class="season-frame" id="summerFrame"><img id="summerImage" alt="夏・冰島作品"></div></div>
+        <div class="season-caption"><div class="season-number" id="summerNumber"></div><h3 id="summerTitle"></h3><p id="summerText"></p><small id="summerNote"></small><div class="season-controls"><button id="summerPrev">上一幅</button><button id="summerNext">下一幅</button></div></div>
+      </div>
+    </section>
+
+    <section class="ending">
+      <div class="eyebrow">Between the Inner World and the Real World</div>
+      <h2>在心與世界之間，<br>留下觀看的痕跡。</h2>
+      <div class="line"></div>
+      <p>有些風景被相機保存，有些被記憶改寫。東平選擇用紙與筆，把當下留在介於真實與心象之間的位置。</p>
+    </section>
+  </main>
+
+  <footer><span>《心象之間》——蘇東平繪畫展</span><span>Online Exhibition</span></footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="作品放大檢視">
+    <div class="close">×</div><img id="lightboxImg" alt="放大作品">
+  </div>
+
+  <script>
+    const springFiles=Array.from({length:24},(_,i)=>`2026春 希臘/page-${String(i+1).padStart(2,'0')}.jpg`);
+    const summerFiles=Array.from({length:23},(_,i)=>`2025夏 冰島/投影片${i+2}.JPG`);
+    const springTitles=['港口的藍','羅馬山城的午後','泉水落在石上','城市的斜光','海岸線與遠方','船離開以後','愛琴海來信','靠岸時的綠','島與島之間','晚餐前的海','阿馬爾菲的坡','波西塔諾，向下走','羅馬的餘暉','回望海面','小小的甲板','藍色的練習','午後無人說話','鹽留在紙上','最後一盞船燈','旅程的背面','陸地正在靠近','一段慢慢變暗的海','寫給春天的明信片','抵達之前'];
+    const summerTitles=['雷克雅維克的夜','藍湖，沉默發亮','教會山的風','黑沙灘上的白浪','維克午後','冰川的呼吸','火山留下的線','遠方的瀑布','苔原的綠','霧裡的山口','北方的屋頂','胡薩維克清晨','海鳥把天劃開','阿克雷里以東','一小塊融化的藍','蘭德曼納勞卡','紅色山谷','石頭記得水','走過無人之地','夜不完全降臨','冬天的預告','島的另一面','把光帶回家'];
+    const prose=['海面把城市揉成一小塊藍，船在其中緩慢移動。畫裡的線不是邊界，是出發時還沒說完的話。','手寫的地名像一枚小小路標，提醒我：風景從不只在眼前，也在我們願意停留的時間裡。','光從島的背面折回來，白牆、山坡和水都變得輕。那一天，遠方沒有距離，只有呼吸。','旅人把日期留在角落，像把一顆種子埋進畫紙。多年後再看，仍能聽見當時海風的方向。'];
+    function drawSeason(kind,index,turn){
+      const summer=kind==='summer', files=summer?summerFiles:springFiles, titles=summer?summerTitles:springTitles, key=summer?'summer':'spring', n=index+1;
+      document.getElementById(key+'Image').src=files[index]; document.getElementById(key+'Image').alt=titles[index];
+      document.getElementById(key+'Number').textContent=`${String(n).padStart(2,'0')} / ${String(files.length).padStart(2,'0')}`;
+      document.getElementById(key+'Title').textContent=titles[index]; document.getElementById(key+'Text').textContent=prose[index%prose.length];
+      document.getElementById(key+'Note').textContent=summer?'Iceland · Summer 2025 · hand-written travel note':'Greece · Spring 2026 · hand-written travel note';
+      const frame=document.getElementById(key+'Frame'); frame.classList.remove('turn-left','turn-right'); void frame.offsetWidth; frame.classList.add(turn==='left'?'turn-left':'turn-right');
+    }
+    let springIndex=0,summerIndex=0;
+    drawSeason('spring',springIndex,'right'); drawSeason('summer',summerIndex,'right');
+    document.querySelectorAll('[data-season]').forEach(card=>card.onclick=()=>{const kind=card.dataset.season;document.querySelectorAll('[data-season]').forEach(x=>x.classList.toggle('active',x===card));document.querySelectorAll('.season-view').forEach(x=>x.classList.toggle('active',x.id===kind+'View'))});
+    document.getElementById('springPrev').onclick=()=>{springIndex=(springIndex+springFiles.length-1)%springFiles.length;drawSeason('spring',springIndex,'left')};
+    document.getElementById('springNext').onclick=()=>{springIndex=(springIndex+1)%springFiles.length;drawSeason('spring',springIndex,'right')};
+    document.getElementById('summerPrev').onclick=()=>{summerIndex=(summerIndex+summerFiles.length-1)%summerFiles.length;drawSeason('summer',summerIndex,'left')};
+    document.getElementById('summerNext').onclick=()=>{summerIndex=(summerIndex+1)%summerFiles.length;drawSeason('summer',summerIndex,'right')};
+    const lb=document.getElementById('lightbox'), lbImg=document.getElementById('lightboxImg');
+    document.querySelectorAll('.season-frame img').forEach(img=>img.addEventListener('click',()=>{lbImg.src=img.src;lbImg.alt=img.alt;lb.classList.add('open');document.body.style.overflow='hidden';}));
+    lb.addEventListener('click',()=>{lb.classList.remove('open'); document.body.style.overflow='';});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){lb.classList.remove('open');document.body.style.overflow='';}});
+    const nav=document.getElementById('nav'); window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>24));
+    const menu=document.getElementById('menu'), links=document.getElementById('links'); menu.addEventListener('click',()=>links.classList.toggle('show')); links.addEventListener('click',()=>links.classList.remove('show'));
+    const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target)}}),{threshold:.12});
+    document.querySelectorAll('.section,.gallery-wrap,.ending').forEach(section=>revealObserver.observe(section));
+  </script>
+</body>
+</html>
